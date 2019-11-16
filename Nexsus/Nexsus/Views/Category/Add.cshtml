@@ -1,0 +1,106 @@
+﻿@model Nexsus.Models.CategoryViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add</title>
+   
+    @section MyStyle
+    {
+        <style>
+            table {
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
+
+    }
+
+</head>
+<body>
+<div>
+    <div class="container">
+        
+       
+        <center>
+            <h2>Category Entry</h2>
+
+            <form method="post">
+               
+                <table>
+                    <tr>
+                        <div class="form-group">
+                            <td>@Html.LabelFor(c => c.Code)</td>
+                            @*<td><input type="text" name="RollNo" value="@Model.RollNo" /></td>*@
+                            <td>@Html.TextBoxFor(c => c.Code, Model.Code, new { @class = "form-control" })</td>
+                        <td>@Html.ValidationMessageFor(c => c.Code)</td>
+                        </div>
+                        </tr>
+                    <tr>
+                        <td>@Html.LabelFor(c => c.Name)</td>
+                        <td><input type="text" name="Name" value="@Model.Name" unquie ="Name" /></td>
+                        @*<td>@Html.TextBoxFor(c => c.Name, Model.Name)</td>*@
+                        <td>@Html.ValidationMessageFor(c => c.Name)</td>
+                       
+                        <td></td>
+                    </tr>
+
+                    <tr>
+                        <td></td>
+                        <td><button type="submit" class="btn btn-info">Submit</button> 
+                        
+                       
+                        <td>
+                            @if (ViewBag.Message != null)
+                            {
+                                <h3>
+                                    <b>
+                                        @ViewBag.Message
+                                    </b>
+                                </h3>
+                            }
+
+                        </td>
+                    </tr>
+
+                </table>
+
+
+
+            </form>
+        </center>
+        @{
+
+            Html.RenderPartial("~/Views/Shared/Category/_CategoryDetails.cshtml", Model);
+        }
+    </div>
+  
+</div>
+</body>
+
+</html>
+
+@section MyScript
+{
+    <script src="~/scripts/jquery-1.10.2.js"></script>
+    <script src="~/scripts/jquery.validate.js"></script>
+    <script src="~/scripts/jquery.validate.unobtrusive.min.js"></script>
+    
+}

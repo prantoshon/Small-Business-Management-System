@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+
+    .navbar {
+        width: 100%;
+        background-color: #555;
+        overflow: auto;
+    }
+
+    .navbar a {
+        float: left;
+        padding: 12px;
+        color: white;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .navbar a:hover {
+        background-color: #000;
+    }
+
+    .active {
+        background-color: #4CAF50;
+    }
+
+    }
+    </style>
+@RenderSection("MyStyle",false)
+<body>
+   
+
+ 
+
+<div class="navbar">
+    <a class="active" href="@Url.Action("Add", "Category")"> Category Entry</a> 
+    <a href="@Url.Action("Search", "Category")"> Category Search</a> 
+    <a href="#"> Suplier</a> 
+    
+</div>
+
+</body>
+
+@RenderBody()
+
+</html> 
+@RenderSection("MyScript", false)

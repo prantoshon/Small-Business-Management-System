@@ -1,0 +1,21 @@
+﻿@model Nexsus.Models.CategoryViewModel
+<table>
+    <tr>
+        <th>Sl</th>
+        <th>Code No</th>
+        <th>Name</th>
+            
+    </tr>
+    @{ int i = 1;}
+    @foreach (var category in Model.Categorys)
+    {
+        <tr>
+            <td>@(i++)</td>
+            <td>@category.Code</td>
+            <td>@category.Name</td>
+            <td>@Html.ActionLink("Edit", "Edit", "Category", new { Id = category.Id },null)</td>
+             
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,77 @@
+﻿@model Nexsus.Models.CategoryViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@section MyStyle
+{
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+
+}
+
+<div>
+    <div class="container">
+        <center>
+            <h2>Category Edit</h2>
+
+            <form method="post">
+                <table>
+                    <tr>
+                        <td>@Html.LabelFor(c => c.Code)</td>
+                        @*<td><input type="text" name="RollNo" value="@Model.RollNo" /></td>*@
+                        <td>@Html.TextBoxFor(c => c.Code, Model.Code)</td>
+                        <td>@Html.ValidationMessageFor(c => c.Code)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(c => c.Name)</td>
+                        @*<td><input type="text" name="Name" value="@Model.Name" /></td>*@
+                        <td>@Html.TextBoxFor(c => c.Name, Model.Name)</td>
+                        <td>@Html.ValidationMessageFor(c => c.Name)</td>
+                        <td></td>
+                    </tr>
+                    
+                    <tr>
+                        <td></td>
+                        <td><button type="submit" class="btn btn-info">Submit</button></td>
+                        <td>
+                            @if (ViewBag.Message != null)
+                            {
+                                <h3>
+                                    <b>
+                                        @ViewBag.Message
+                                    </b>
+                                </h3>
+                            }
+
+                        </td>
+                    </tr>
+
+                </table>
+
+             
+               
+            </form>
+        </center>
+
+    </div>
+  
+</div>
+
