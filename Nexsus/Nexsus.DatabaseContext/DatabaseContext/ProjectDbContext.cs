@@ -11,5 +11,9 @@ namespace Nexsus.DatabaseContext.DatabaseContext
    public class ProjectDbContext : DbContext
     {
         public DbSet<CategoryModel> CategoryDatabaSet { set; get; }
+        public DbSet<SupplierModel> SupplierDataBaseSet { set; get; }
+
+
+
     }
 }

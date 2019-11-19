@@ -22,6 +22,9 @@ namespace Nexsus
                 cfg.CreateMap<CategoryViewModel, CategoryModel>();
                 cfg.CreateMap<CategoryModel, CategoryViewModel>();
 
+                cfg.CreateMap<SupplierViewModel, SupplierModel>();
+                cfg.CreateMap<SupplierModel,SupplierViewModel>();
+
             });
         }
     }

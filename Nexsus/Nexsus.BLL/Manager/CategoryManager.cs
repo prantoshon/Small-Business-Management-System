@@ -32,8 +32,14 @@ namespace Nexsus.BLL.Manager
             return _categoryRepository.Update(category);
         }
 
-      
+        public bool IsExist(CategoryModel categoryModel)
+        {
+            return _categoryRepository.IsExist(categoryModel);
+        }
 
-      
+
+
+
+
     }
 }

@@ -12,3 +12,4 @@ c:\Users\USER\documents\visual studio 2015\Projects\Nexsus\Nexsus.DatabaseContex
 c:\Users\USER\documents\visual studio 2015\Projects\Nexsus\Nexsus.DatabaseContext\obj\Debug\Nexsus.DatabaseContext.pdb
 c:\Users\USER\documents\visual studio 2015\Projects\Nexsus\Nexsus.DatabaseContext\obj\Debug\Nexsus.DatabaseContext.Migrations.DatabaseAdd.resources
 c:\Users\USER\documents\visual studio 2015\Projects\Nexsus\Nexsus.DatabaseContext\obj\Debug\Nexsus.DatabaseContext.csproj.GenerateResource.Cache
+C:\Users\USER\documents\visual studio 2015\Projects\Nexsus\Nexsus.DatabaseContext\obj\Debug\Nexsus.DatabaseContext.Migrations.AddTable.resources

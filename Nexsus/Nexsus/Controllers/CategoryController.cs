@@ -16,9 +16,16 @@ namespace Nexsus.Controllers
         // GET: Category
         CategoryModel _categoryModel = new CategoryModel();
         CategoryManager  _categoryManager = new CategoryManager();
+        ProjectDbContext _dbContext = new ProjectDbContext();
+
+        public ActionResult Home()
+        {
+            return View();
+        }
 
         public ActionResult Add()
         {
+
             CategoryViewModel categoryViewModel = new CategoryViewModel();
 
             categoryViewModel.Categorys = _categoryManager.GetAll();
@@ -37,18 +44,25 @@ namespace Nexsus.Controllers
                 
                
                 CategoryModel category = Mapper.Map<CategoryModel>(categoryViewModel);
-
-               
-
-                if (_categoryManager.Add(category))
+                if (_categoryManager.IsExist(category))
                 {
-
-                    message = "Saved";
+                    message = "Data is already Exist In Database";
+                   
                 }
                 else
                 {
-                    message = "Not Saved";
+                    if (_categoryManager.Add(category))
+                    {
+
+                        message = "Saved";
+                    }
+                    else
+                    {
+                        message = "Not Saved";
+                    }
                 }
+
+              
             }
             else
             {
@@ -86,17 +100,26 @@ namespace Nexsus.Controllers
             {
 
                 CategoryModel category = Mapper.Map<CategoryModel>(categoryViewModel);
+
+                //if (_categoryManager.IsExist(category))
+                //{
+                //    message = "Data is already Exist In Database";
+
+                //}
+                //else
+               // {
+                    if (_categoryManager.Update(category))
+                    {
+
+                        message = "Update";
+                    }
+                    else
+                    {
+                        message = "Not Update";
+                    }
+               // }
+
               
-
-                if (_categoryManager.Update(category))
-                {
-
-                    message = "Update";
-                }
-                else
-                {
-                    message = "Not Update";
-                }
             }
             else
             {
@@ -111,49 +134,77 @@ namespace Nexsus.Controllers
             categoryViewModel.Categorys = _categoryManager.GetAll();
             return View(categoryViewModel);
         }
+      
 
-        public ActionResult Search()
+        public ActionResult Search(string seacrhing)
         {
-           CategoryViewModel categoryViewModel = new CategoryViewModel();
-           categoryViewModel.Categorys = _categoryManager.GetAll();
-           return View(categoryViewModel);
-        }
-
-        [HttpPost]
-        public ActionResult Search(CategoryViewModel categoryViewModel)
-        {
-            string message;
-
-            var categorys = _categoryManager.GetAll();
-            if (categoryViewModel.Code != null)
-            {
-                categorys = categorys.Where(c => c.Code.Contains(categoryViewModel.Code)).ToList();
-
-            }
+           //CategoryViewModel categoryViewModel = new CategoryViewModel();
+           //categoryViewModel.Categorys = _categoryManager.GetAll();
+           //return View(categoryViewModel);
          
-            
-            if (categoryViewModel.Name != null)
-            {
-                categorys = categorys.Where(c => c.Name.Contains(categoryViewModel.Name)).ToList();
-            }
-            
-            categoryViewModel.Categorys = categorys;
-            return View(categoryViewModel);
+           var category = from s in _dbContext.CategoryDatabaSet select s;
+           if (!String.IsNullOrEmpty(seacrhing))
+           {
+               category = category.Where(s => s.Code.Contains(seacrhing) || s.Name.Contains(seacrhing));
+               
+
+
+           }
+
+          
+           return View(category.ToList());
+
         }
 
-        public JsonResult CodeUnique(CategoryModel categoryModel)
-        {
-            return IsExist(categoryModel.Code, categoryModel.Name)
-                ? Json(true, JsonRequestBehavior.AllowGet)
-                : Json(false, JsonRequestBehavior.AllowGet);
-        }
+        //[HttpPost]
+        //public ActionResult Search(CategoryViewModel categoryViewModel)
+        //{
+        //    string message;
 
-        public bool IsExist(string Code, string Name)
-        {
-            //True:False--- action that implement to check barcode uniqueness
+        //    var categorys = _categoryManager.GetAll();
+        //    if (categoryViewModel.Code != null)
+        //    {
+        //        categorys = categorys.Where(c => c.Code.Contains(categoryViewModel.Code)).ToList();
 
-            return false;//Always return false to display error message
-        }
+        //    }
+
+
+        //    if (categoryViewModel.Name != null)
+        //    {
+        //        categorys = categorys.Where(c => c.Name.Contains(categoryViewModel.Name)).ToList();
+        //    }
+
+        //    categoryViewModel.Categorys = categorys;
+        //    return View(categoryViewModel);
+        //}
+
+        //public JsonResult CodeUnique(CategoryModel categoryModel)
+        //{
+        //    return IsExist(categoryModel.Code, categoryModel.Name)
+        //        ? Json(true, JsonRequestBehavior.AllowGet)
+        //        : Json(false, JsonRequestBehavior.AllowGet);
+        //}
+
+        //public bool IsExist(string Code, string Name)
+        //{
+        //    //True:False--- action that implement to check barcode uniqueness
+
+        //    return false;//Always return false to display error message
+        //}
+       
+        //public ActionResult CheckExist(string code, string name )
+        //{
+        //    var validateName = _dbContext.CategoryDatabaSet.FirstOrDefault
+        //        (x => x.Code == code || x.Name == name);
+        //    if (validateName != null)
+        //    {
+        //        return Json(false, JsonRequestBehavior.AllowGet);
+        //    }
+        //    else
+        //    {
+        //        return Json(true, JsonRequestBehavior.AllowGet);
+        //    }
+        //}
 
 
 

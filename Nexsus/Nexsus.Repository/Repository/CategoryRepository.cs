@@ -12,8 +12,10 @@ namespace Nexsus.Repository.Repository
    public class CategoryRepository
     {
         ProjectDbContext _dbContext = new ProjectDbContext();
-        public bool Add(CategoryModel categoryModel)
+
+        public bool IsExist(CategoryModel categoryModel)
         {
+           
             int i = _dbContext.CategoryDatabaSet
                 .Where(c => c.Code == categoryModel.Code || c.Name == categoryModel.Name).Count();
 
@@ -21,8 +23,23 @@ namespace Nexsus.Repository.Repository
 
             if (i > 0)
             {
-                return false;
+                return true;
             }
+
+            return false;
+        }
+
+        public bool Add(CategoryModel categoryModel)
+        {
+            //int i = _dbContext.CategoryDatabaSet
+            //    .Where(c => c.Code == categoryModel.Code || c.Name == categoryModel.Name).Count();
+
+
+
+            //if (i > 0)
+            //{
+            //    return false;
+            //}
 
             _dbContext.CategoryDatabaSet.Add(categoryModel);
             return _dbContext.SaveChanges() > 0;
@@ -67,6 +84,8 @@ namespace Nexsus.Repository.Repository
             CategoryModel aCategoryModel = _dbContext.CategoryDatabaSet.FirstOrDefault(c => c.Id == category.Id);
             if (aCategoryModel != null)
             {
+              
+
                 aCategoryModel.Code = category.Code;
                 aCategoryModel.Name = category.Name;
 
